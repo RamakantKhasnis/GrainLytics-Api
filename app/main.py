@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.database import Base, engine
-from app.routes import dashboard, sensors, geo, chat
+from app.routes import dashboard, sensors, geo, chat, lora
 
 # Create tables if they don't exist
 Base.metadata.create_all(bind=engine)
@@ -20,6 +20,7 @@ app.include_router(dashboard.router, prefix="/api", tags=["dashboard"])
 app.include_router(sensors.router, prefix="/api", tags=["sensors"])
 app.include_router(geo.router, prefix="/api", tags=["geo"])
 app.include_router(chat.router, prefix="/api", tags=["chat"])
+app.include_router(lora.router, prefix="/api/lora", tags=["lora"])
 
 @app.get("/health")
 def health_check():
